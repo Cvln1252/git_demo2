@@ -1,0 +1,1000 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     50855,        990]
+NotebookOptionsPosition[     39333,        832]
+NotebookOutlinePosition[     39734,        848]
+CellTagsIndexPosition[     39691,        845]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["A Mathematica Primer", "Title",ExpressionUUID->"6387ac9a-657c-ca4d-97b6-6d03b6a82ee5"],
+
+Cell["\<\
+This is a bare-bones Mathematica primer. Some basic commands for calculations \
+and plots are given. A large set of useful commands and examples may be found \
+at https://reference.wolfram.com/language/\
+\>", "Text",ExpressionUUID->"1b8adc06-e9b8-eb4f-93de-0be1362e8a63"],
+
+Cell["\<\
+(Mathematica is the desktop application; the programming language is the \
+Wolfram Language. You can run the same notebooks in Wolfram Desktop or \
+Wolfram Cloud.)\
+\>", "Text",
+ FontSlant->"Italic",ExpressionUUID->"7641b61c-beca-df49-9ed7-b102831c2d38"],
+
+Cell["\<\
+This notebook is distributed without stored output. To reproduce every result \
+and figure presented in the primer, select Evaluation/Evaluate Notebook, or \
+evaluate an individual input cell by pressing \"shift-return\". The input and \
+output line numbers cited in the commentary below refer to evaluation of the \
+notebook in its entirety, in order, from a fresh kernel.\
+\>", "Text",
+ FontSlant->"Italic",ExpressionUUID->"8a6dc32b-7613-6e48-9fca-93ca2b71268b"],
+
+Cell[CellGroupData[{
+
+Cell["Basic steps for a Mathematica calculation", "Section",ExpressionUUID->"87d6e2dd-f70a-794f-b484-5a86e66d8b43"],
+
+Cell["1. Start up Mathematica. An \"Untitled-1\" window will appear.", "Text",ExpressionUUID->"5107f8be-6256-d34d-9921-5f3a4af1d064"],
+
+Cell["\<\
+2. You will automatically be in the \"input\" command mode. Type a \
+Mathematica command in the window. Some examples are given in the session \
+printed out below. Be very careful with syntax. Pay special attention, for \
+example, whether you should type \")\" or \"]\" or \"}\". As an illustration, \
+suppose that you have specified a value for the quantity x and you want to \
+evaluate the sine of x. This must be written as Sin[x] and not sin[x] or \
+sin(x) or Sin(x). Note that all built-in Mathematica function commands begin \
+with an upper case letter, and the argument must be enclosed by square \
+brackets. To find the correct syntax for various commands and functions, you \
+can use the Help menu at the top of the screen when you are in the \
+Mathematica program.\
+\>", "Text",ExpressionUUID->"1a10b425-6125-9945-8097-51b62a817613"],
+
+Cell["\<\
+3. After typing in your Mathematica command, press \"shift-return\", which \
+means pressing the \"shift\" and \"return\" keys simultaneously. (For \
+full-size keyboards, just pressing the \"enter\" key on the numeric keypad \
+also works.) After the output is displayed, you may type another input \
+command, press \"shift-return\" again, and continue the session in this way. \
+If, instead of working with one command at a time, you wish to set up a \
+series of commands, you can type them sequentially, pressing \"return\" after \
+each one. Mathematica will not evaluate these commands until you press \
+\"shift-return\" or \"enter\", at which time the entire block of commands \
+will be sequentially evaluated. (If you wish to suppress the print out of the \
+result of any one of these commands in your block of commands, put a \
+semicolon at the end of that command.)\
+\>", "Text",ExpressionUUID->"fac9adcf-4b11-0542-be5c-2253aac777c7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Cautionary Advice", "Section",ExpressionUUID->"139e2f08-c841-ef43-85bf-9166e8078e59"],
+
+Cell["\<\
+1. You may always use the explicit asterisk symbol for multiplication. \
+However, for aesthetic purposes, you can just leave a blank space (or more \
+than one blank space) between symbols to be multiplied. If you do this, be \
+very careful. For example, the product \"a\" times \"x\" can be written as \
+\"a*x\" or as \"a x\". If you type \"ax\" you are referring to a single \
+variable whose name consists of the two letters \"a\" and \"x\". In the \
+special case of a number pre-multiplying a variable, you are not required to \
+write the product using an asterisk or a space or a set of enclosing \
+round-parentheses. For example, you can type \"2x\" without a space between \
+the \"2\" and \"x\" and this will be understood by Mathematica to be 2 times \
+x, just as if you wrote \"2*x\" or \"2 x\" or 2(x). Although the \
+multiplication symbol \"*\" may tend to clutter long expressions, it's a good \
+idea to use it if you have not yet become proficient in Mathematica.\
+\>", "Text",ExpressionUUID->"5f805c23-3c81-124c-b4e4-ac6421ddba78"],
+
+Cell["\<\
+2. A common error that users of Mathematica run into occurs when they attempt \
+to plot an expression that is not real or has no numerical value because it \
+was either not defined properly or the quantities within the expression do \
+not have specific numerical values. As an example, suppose that you try to \
+plot an expression that you have called \"f\" that depends on the variable \
+\"x\", but the expression for f contains another quantity \"a\" that has not \
+been given a numerical value. For example, f= Sin[x]+a*Cos[x], with no value \
+for \"a\" specified. Now suppose that you type the plot command \"Plot[f, {x, \
+0, 10}]\" to plot f between x=0 and x=10. Mathematica will give you a series \
+of error messages:
+      \"f is not a machine-size real number at x= ...\"
+      \"f is not a machine-size real number at x= ...\"
+and display an empty plot. To fix this, define your expression correctly, \
+i.e., specify a value for \"a\" before you type the plot command.\
+\>", "Text",ExpressionUUID->"03fdd9c2-168d-e843-ad5e-b7b0ceb7e088"],
+
+Cell["\<\
+Assigning a numerical value to a before the expression is plotted removes the \
+difficulty, as the following commands illustrate:\
+\>", "Text",ExpressionUUID->"3676183b-989c-2842-98a7-74331f9c3e60"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], "=", 
+   RowBox[{
+    RowBox[{"Sin", "[", "x", "]"}], "+", 
+    RowBox[{"a", " ", 
+     RowBox[{"Cos", "[", "x", "]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"f", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", 
+     RowBox[{"2", "Pi"}]}], "}"}]}], "]"}]}], "Input",ExpressionUUID->\
+"14a9f165-58d2-5046-8033-43e0efca9614"],
+
+Cell["\<\
+The symbols f and a are cleared here so that the definitions just entered do \
+not affect the session that follows:\
+\>", "Text",ExpressionUUID->"4c2e153d-242e-5c42-bce4-40dc3b0b29a9"],
+
+Cell["Clear[f, a]", "Input",ExpressionUUID->"567495ac-a760-d541-9966-8bba955fedfb"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Cells", "Section",ExpressionUUID->"4b40c2b4-2226-1944-912f-193b774edd98"],
+
+Cell["\<\
+Your output will appear in a \"cell\" just below your input line. The \"cells\
+\" are denoted by the blue brackets on the right of the screen. The output \
+cell will be grouped with your input command cell inside an outer cell \
+bracket signifying the entire cell group. You can select any cell by clicking \
+on the cell bracket with the mouse.\
+\>", "Text",ExpressionUUID->"cc91407e-7653-c44c-8b72-384134fe9a59"],
+
+Cell["\<\
+To correct a previous calculation: Type your corrections in the command, \
+click on the cell bracket, and press \"shift-return\". The new output will \
+then over-write the previous output. (Alternatively, instead of selecting the \
+cell bracket, you can just click on any point in the cell containing the \
+command lines.) You can delete any cell or cell group by selecting the cell \
+or cell group and using the delete key.\
+\>", "Text",ExpressionUUID->"1914bd09-d7e9-d24c-9a65-61911fa13132"],
+
+Cell["\<\
+To close or open-up a group of cells: Double-click on the cell bracket. (A \
+darkened lower corner of a bracket indicates a closed cell group.) To merge \
+cells, select them (drag mouse over the brackets of the desired cells) and \
+use menu item \"Cell/Merge Cells\".\
+\>", "Text",ExpressionUUID->"16c5c54b-bea2-3f4b-8207-248e7480bc55"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Palettes", "Section",ExpressionUUID->"f1a32254-1f62-4e4e-b4b6-92441c866651"],
+
+Cell["\<\
+As an alternative to typing command-lines, use palettes by choosing the menu \
+item Palettes at the top of the screen in recent versions of Mathematica or \
+use the menu item File/Palettes in earlier versions. To create your command, \
+use the \"Basic Math Input\" palette (or \"Basic Input \" palette in earlier \
+versions), and type the desired variables or numbers in the template slots, \
+then press \"shift-return\". You can navigate sequentially through template \
+slots by pressing \"tab\" key, or else use the mouse. Note that with the \
+Basic Math Input palette, you can enter Greek letters, and for example, enter \
+\"\[Pi]\" instead of having to type \"Pi\" for 3.14159...\
+\>", "Text",ExpressionUUID->"c4368be8-a979-c94a-88e0-a27799f79ee1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Input Mode and Text Mode", "Section",ExpressionUUID->"2479193d-7189-d04a-8623-b20dc7f96adb"],
+
+Cell["\<\
+When you type in your window you will normally be in the input mode in which \
+case what you type will be interpreted as Mathematica commands. The typed \
+characters appear boldface in this mode. However, you might want to add \
+blocks of text to annotate your work or to create a notebook, and this \
+requires you to start a cell in Text Mode. To do this position your cursor \
+(click) outside and below your previous cell group, and choose \
+Format/Style/Text, or use a keyboard shortcut.\
+\>", "Text",ExpressionUUID->"c2781d0f-4acf-954c-9ad0-238dd1b91e5c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Keyboard Shortcuts for Menu Items", "Section",ExpressionUUID->"a4a06de8-628d-1c43-b9c8-557cef664201"],
+
+Cell["\<\
+To find the appropriate keyboard shortcut for a specific menu item, use the \
+menu for the given item and note the keyboard symbol listed next to that \
+item. Subsequently, you can use this keyboard shortcut instead of using the \
+menu. For example, here are some keyboard shortcuts for Mathematica on a \
+Macintosh computer (Microsoft Windows and other operating systems have their \
+own set of keyboard shortcuts, which you can find by going to the menu item \
+as just described.):\
+\>", "Text",ExpressionUUID->"60e339b5-6d3c-ff47-82bb-67228aa66f1d"],
+
+Cell["\<\
+Copy: \"Cmd-C\" ; Paste: \"Cmd-V\" ; Cut: \"Cmd-X\"
+Undo: \"Cmd-Z\" ; Select All: \"Cmd-A\" ; Save: \"Cmd-S\"
+Abort Calculation: \"Cmd- .\" (or \"Evaluation/Abort Evaluation\" or \
+\"Kernel/Abort Evaluation\" on the menu bar)
+Text-mode style: \"Cmd-7\" (or \"Format/Style/Text\" on the menu bar)
+Return to Input-mode style: \"Cmd-9\" (or \"Format/Style/Input\" on the menu \
+bar)
+Bold text (in textmode): \"Cmd-B\" . Toggle (press \"Cmd-B\" again) to turn \
+bold text off.
+Italic text (in textmode): \"Cmd-I\" . Toggle (press \"Cmd-I\" again) to turn \
+italic text off.\
+\>", "Text",ExpressionUUID->"6783f134-a93b-2241-be50-7a78640b25de"],
+
+Cell["\<\
+Here \"Cmd\" is the \"Command\" key, also known as the \"Apple\" or \
+\"Flower\" key, and appears to the immediate left of the spacebar on a \
+Macintosh keyboard. \"Cmd-C\", for example, means hold down the \"Command\" \
+key while pressing the \"C\" key on the keyboard. (The use of upper case \
+letters in denoting a keystroke such as Cmd-C, etc., does not signify typing \
+an upper-case C, etc.)\
+\>", "Text",ExpressionUUID->"50a5c9d7-3f04-5d4f-a685-1d4878ad2718"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Keyboard Shortcuts for Greek letters", "Section",ExpressionUUID->"877b6653-2d98-c54f-abd4-ccc3ad6f3714"],
+
+Cell["\<\
+It is convenient to use keyboard shortcuts for writing Greek letters. The \
+shortcut for a Greek letter is to sequentially press the escape key, the \
+roman letter equivalent, and the escape key. For example, to type the \
+lower-case Greek letter gamma, press esc, g, esc, where esc is the \
+abbreviation for the escape key. For capital gamma press esc, G, esc.\
+\>", "Text",ExpressionUUID->"72c11b7e-d355-e249-b9fd-1b9b5d96d828"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Examples of Calculations and Plots:", "Section",ExpressionUUID->"2be8c268-bea4-fe4a-b79a-77cc5ac302f8"],
+
+Cell["\<\
+In the Mathematica session below, note that Mathematica displays the input \
+command-lines in boldface font, sequentially numbers them, and numbers the \
+corresponding output-lines. (The explanatory text between some commands was \
+created by going to Format/Style/Text to enter the text mode.) Pi and E are \
+the appropriate Mathematica keyboard inputs for 3.14159... and 2.71828..., \
+respectively; the Basic Input palette symbols and Mathematica's output \
+symbols for these quantities are \[Pi] and \[ExponentialE], respectively; \
+N[expr] evaluates an expression expr numerically; N[expr, 40] evaluates expr \
+to 40 digit precision (unless the numbers in expr are decimal or machine \
+precision). The construction \"expr /. x ->a\" means return the value of expr \
+for the case that x=a but do not change expr as a result of this evaluation; \
+Integrate[f, {x, x1, x2}] means analytically integrate f from x = x1 to x=x2; \
+NIntegrate[f, {x, x1, x2}] means numerically integrate f from x = x1 to x=x2. \
+(The indefinite integral, or anti-derivative, is given by Integrate[f, x], \
+but is not used in this session.)\
+\>", "Text",ExpressionUUID->"ee11fbd5-3057-1342-8b84-b2e052f90da5"],
+
+Cell["\<\
+The correct syntax for creating simple plots is illustrated by the example \
+\"Plot[f, {x, 0, 3}]\" in input line 7. Note that in the example, \"Plot[f, \
+{x, 0, 5}]\" entered in input line 8, Mathematica has decided on its own to \
+display more detail of the oscillations of f for large values of x, and in \
+doing so, was unable to fully display the peaks occurring in the range 1>x>0. \
+To get Mathematica to give us the entire plot of f vs. x for \
+5\[GreaterEqual]x\[GreaterEqual]0, we use the command \"Plot[f, {x, 0, 5}, \
+PlotRange->All]\" in input line 9, where \"PlotRange->All\" is the option \
+that overrides Mathematica's occasional attempt to display features that it \
+thinks we would like to see and instead tells Mathematica to show us \
+everything. (Be sure to use the correct syntax, with \"PlotRange\" as a \
+single word containing an upper case R.)\
+\>", "Text",ExpressionUUID->"93e8a120-2239-a04f-ae1b-8df832297512"],
+
+Cell["Pi", "Input",ExpressionUUID->"43b1296c-0cb0-4342-83ce-b57090043776"],
+
+Cell["N[Pi]", "Input",ExpressionUUID->"aceeebe8-0563-5641-96b6-24fe3b50374f"],
+
+Cell["N[Pi, 40]", "Input",ExpressionUUID->"570d6257-03ae-1849-b9d0-065a04f43450"],
+
+Cell["f = Sin[10 x] E^(-x)", "Input",ExpressionUUID->"198ad4d8-df15-a040-ab63-643a2d8698c9"],
+
+Cell["Plot[f, {x, 0, 3}]", "Input",ExpressionUUID->"6a95dc57-1099-0848-b0b5-8f90ad0ac891"],
+
+Cell["Plot[f, {x, 0, 5}]", "Input",ExpressionUUID->"12c30a3d-e7d6-1140-a1a1-33dfca26ba90"],
+
+Cell["Plot[f, {x, 0, 5}, PlotRange -> All]", "Input",ExpressionUUID->"859a9949-cc6e-4241-b1e6-a80bdfa0fa99"],
+
+Cell["\<\
+Note: It is often desirable to label the plot axes. The option AxesLabel\
+\[Rule] {\"xtext\", \"ytext\"} puts the text-string xtext on the x-axis and \
+the text string ytext on the y-axis. For example, to place the symbol x on \
+the x-axis and the symbol f on the y-axis, change the previous Plot command to
+Plot[f, {x, 0, 5}, PlotRange\[Rule]All, AxesLabel\[Rule] {\"x\", \"f\"}]. To \
+add the plot-label myplot, add the option PlotLabel\[Rule] \"myplot\", as for \
+example,
+Plot[f, {x, 0, 5}, PlotRange\[Rule]All, AxesLabel\[Rule] {\"x\", \"f\"}, \
+PlotLabel\[Rule] \"f = exp(-x) sin 10x\"].\
+\>", "Text",ExpressionUUID->"3de3d5e2-0acf-0f47-816a-30545cd1b140"],
+
+Cell["\<\
+Plot[f, {x, 0, 5}, PlotRange -> All, AxesLabel -> {\"x\", \"f\"}]\
+\>", "Input",ExpressionUUID->"bbc72416-a4be-7d44-a63f-2aff02962746"],
+
+Cell["\<\
+Plot[f, {x, 0, 5}, PlotRange -> All, AxesLabel -> {\"x\", \"f\"}, PlotLabel \
+-> \"f = exp(-x) sin 10x\"]\
+\>", "Input",ExpressionUUID->"f7c6123e-fab4-854c-809f-a69ae11f8846"],
+
+Cell["\<\
+In the next command, we integrate f from x=0 to x=b, and define the result to \
+be z. In input line 13, the quantity y is set equal to the value of z for \
+b=1. The result for y is exact because the value of b has been taken to be \
+exactly 1 and therefore all numbers in the output are also exact. To get a \
+numerical value for y we use N[y]. The result checks out to be the same as \
+the numerical integration of f using the NIntegrate command, as it must.\
+\>", "Text",ExpressionUUID->"1f7636c1-39f7-814c-8a41-49b45adc4dc6"],
+
+Cell["z = Integrate[f, {x, 0, b}]", "Input",ExpressionUUID->"abb61091-e716-8447-8f11-a2706b702b18"],
+
+Cell["y = z /. b -> 1", "Input",ExpressionUUID->"4f4c12b0-e084-2a4d-9377-9b76dff4e54a"],
+
+Cell["N[y]", "Input",ExpressionUUID->"7a0f8dfb-7e24-ca4a-a67b-c3fbacef3724"],
+
+Cell["NIntegrate[f, {x, 0, 1}]", "Input",ExpressionUUID->"da42e54d-e0f2-0948-9172-16671a5fbf27"],
+
+Cell[CellGroupData[{
+
+Cell["Example using Palettes:", "Subsection",ExpressionUUID->"ba2b1d2a-7baf-b240-9126-c5969b19e0aa"],
+
+Cell["\<\
+Click on definite integral template in the \"Basic Math Input\" (or \"Basic \
+Input\") palette:\
+\>", "Text",ExpressionUUID->"2ea10329-9d8b-3d4f-9410-f02f0c97d75b"],
+
+Cell[BoxData[
+ RowBox[{
+  SubsuperscriptBox["\[Integral]", "\[Placeholder]", "\[Placeholder]"], 
+  RowBox[{"\[Placeholder]", 
+   RowBox[{"\[DifferentialD]", "\[Placeholder]"}]}]}]], "DisplayFormula",Expre\
+ssionUUID->"4f55b61d-341d-aa46-88e4-308656f2bf63"],
+
+Cell["Now fill-in slots sequentially, and press \"shift-return\".", "Text",ExpressionUUID->"49d020e1-7755-a142-88b8-762e465acb9a"],
+
+Cell[BoxData[
+ RowBox[{
+  SubsuperscriptBox["\[Integral]", "0", "b"], 
+  RowBox[{"f", 
+   RowBox[{"\[DifferentialD]", "x"}]}]}]], "Input",ExpressionUUID->"c5e55e9c-\
+b783-4940-9cdd-d04b03495ec4"],
+
+Cell["\<\
+To evaluate the definite integral with b =1, you can use the % symbol, which \
+stands for the output of the previous command, and attach the substitution \
+rule \"/. b->1\" to it, or else copy and paste the template from the previous \
+input, and replace b with \"1\" before executing the command. The results are \
+equivalent (though grouped in slightly different ways) as shown below:\
+\>", "Text",ExpressionUUID->"12e6743e-f4b4-aa4d-8863-e23b472c1763"],
+
+Cell[BoxData[
+ RowBox[{"%", "/.", 
+  RowBox[{"b", "\[Rule]", "1"}]}]], "Input",ExpressionUUID->"de5e5a1f-3809-\
+ab43-8db6-025ba1ecf110"],
+
+Cell[BoxData[
+ RowBox[{
+  SubsuperscriptBox["\[Integral]", "0", "1"], 
+  RowBox[{"f", 
+   RowBox[{"\[DifferentialD]", "x"}]}]}]], "Input",ExpressionUUID->"e57f28aa-\
+2804-dd4e-8164-5ec0d925aeea"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions, tables, and their plots.", "Section",ExpressionUUID->"545b05f6-82ce-714c-9514-00300277ecdf"],
+
+Cell["\<\
+Instead of defining an expression such as f = Sin[10 x] E^(-x), it is often \
+convenient to define the corresponding explicit function of x, and refer to \
+the function as F[x]. The syntax for defining this function is F[x_]:=Sin[10 \
+x] E^(-x). (Note the \":=\" symbol, which is a colon followed by an equal \
+sign, and note the underscore after the variable within brackets on the \
+left-hand-side of this command.) This construction makes the user-defined \
+function F[x] act exactly as a Mathematica built-in function such as Sin[x] \
+in that you can call F[x] repeatedly with different numerical or symbolic \
+values of x, and F[x] is evaluated afresh each time.\
+\>", "Text",ExpressionUUID->"52ed4b64-e38a-6f4f-a076-0805d2a4dcd6"],
+
+Cell["\<\
+In the following commands, the function F[x] is defined and plotted, and a \
+list which is given the name \"mylist\" is created from this function using \
+the command Table[...]. The iterator \"{x, 0, 3, 0.1}\" in the Table command \
+in input line 21 means that x values are chosen from 0 to 3 in intervals of \
+0.1. The resulting list, shown in the output line 21, consists of a set of \
+paired numbers, each pair enclosed by curly brackets. This list of numbers is \
+displayed in a user-friendly tabular form by typing \"//TableForm\" after the \
+Table[...] command, as seen in line 22. (The same result would be obtained by \
+entering \"mylist//TableForm\".) A plot of the paired set of numbers \
+comprising \"mylist\" is made using the command \"ListPlot\" in line 23. The \
+plot option \"Joined \[Rule] True\" for ListPlot in input line 24 connects \
+the data points with straight line segments.\
+\>", "Text",ExpressionUUID->"6a23b275-78cd-bf46-9d75-b16d0ed0b9a3"],
+
+Cell["F[x_] := Sin[10 x] E^(-x)", "Input",ExpressionUUID->"ddfcc100-6192-fd49-9e09-1d835d56a19f"],
+
+Cell["Plot[F[x], {x, 0, 3}]", "Input",ExpressionUUID->"242a9e92-b375-594c-b33e-a35a4600b098"],
+
+Cell["mylist = Table[{x, F[x]}, {x, 0, 3, 0.1}]", "Input",ExpressionUUID->"f2f79a35-7959-e040-9061-b50607149280"],
+
+Cell["Table[{x, F[x]}, {x, 0, 3, 0.1}] // TableForm", "Input",ExpressionUUID->"03581cd4-6ef5-5447-87d4-2627c5ee1f48"],
+
+Cell["ListPlot[mylist]", "Input",ExpressionUUID->"b9845668-ea0d-a04c-87c5-55c0a61cbcfa"],
+
+Cell["ListPlot[mylist, Joined -> True]", "Input",ExpressionUUID->"49aede56-e180-9344-855d-544b622cf203"],
+
+Cell["\<\
+The option InterpolationOrder specifies the degree of the curve used to join \
+successive data points. The setting InterpolationOrder -> 3 connects the \
+points by a cubic interpolating curve rather than by the straight line \
+segments produced by the default setting:\
+\>", "Text",ExpressionUUID->"68dfd979-988f-e249-bbe1-f6c699fea9ff"],
+
+Cell["ListPlot[mylist, Joined -> True, InterpolationOrder -> 3]", "Input",ExpressionUUID->"6cc47eb0-f48a-b748-aabf-bb915dc16a0a"],
+
+Cell["\<\
+We can display the points and the straight line segments on the same plot. To \
+do this, make a plot of mylist with the option Joined\[Rule]True together \
+with a plot of mylist with the option Joined\[Rule]False, as follows:\
+\>", "Text",ExpressionUUID->"58a15c3a-7283-744d-8c8d-9a713d380fe5"],
+
+Cell["ListPlot[{mylist, mylist}, Joined -> {True, False}]", "Input",ExpressionUUID->"256d2c4f-3844-7542-aede-bba318549fd5"],
+
+Cell["\<\
+Now we create a list called \"mylist2\" which consists of many more values of \
+x and F[x]. The output of this very long list is suppressed by typing a \
+semi-colon after the Table[ ...] command. (This follows the general rule that \
+a semi-colon after a command will prevent the output of that command from \
+being displayed.) This list is subsequently used in the input line 28 to \
+create a plot of the points in the list. In input line 29 the plot option \
+\"Joined \[Rule] True\" connects the data points with straight line segments. \
+The resulting plot shown in output line 29 looks just like the smooth curve \
+of output line 20 because there are so many points contained in mylist2 that \
+the short straight-line segments between adjacent points in the former plot \
+appear to result in a smooth curve.\
+\>", "Text",ExpressionUUID->"02fa896f-aba2-c54c-bb5d-41992d0fa638"],
+
+Cell["mylist2 = Table[{x, F[x]}, {x, 0, 3, 0.02}];", "Input",ExpressionUUID->"e4ca7648-08f7-4a4c-ab02-877d1684fdeb"],
+
+Cell["ListPlot[mylist2]", "Input",ExpressionUUID->"cdd78374-ec7a-cc43-bf9f-c1cb973a0ead"],
+
+Cell["ListPlot[mylist2, Joined -> True]", "Input",ExpressionUUID->"9cda10f6-dc7d-494c-aa83-218438d9d015"],
+
+Cell["\<\
+As another example, we create a set of plots for a function G[x, c] vs. x for \
+two different values of c. The curves are displayed in different colors \
+(blue, red) using the RGBColor option for the plot command. (The arguments of \
+RGBColor are the relative amounts of red, green and blue, respectively.) The \
+Show[...] command shows both curves in a single plot.\
+\>", "Text",ExpressionUUID->"702e1e59-bbc7-0047-83b6-a95d79ecf39a"],
+
+Cell["G[x_, c_] := Sin[c*x]/x", "Input",ExpressionUUID->"251d7362-bec2-d843-a59c-6ce494785718"],
+
+Cell["\<\
+myplot1 = Plot[G[x, 1], {x, -10, 10}, PlotStyle -> RGBColor[0, 0, 1], \
+PlotRange -> All]\
+\>", "Input",ExpressionUUID->"f16430e2-a283-8244-839e-ab59204d27fc"],
+
+Cell["\<\
+myplot2 = Plot[G[x, 2], {x, -10, 10}, PlotStyle -> RGBColor[1, 0, 0], \
+PlotRange -> All]\
+\>", "Input",ExpressionUUID->"89c7bde5-4b68-f744-87f7-f65a0f16a8b1"],
+
+Cell["Show[{myplot1, myplot2}]", "Input",ExpressionUUID->"ebab0366-baf6-2c46-bd1e-be780a8419ae"],
+
+Cell["\<\
+This last plot could have also been obtained by the general method of \
+plotting two different functions in one plot by entering
+Plot[{G[x, 1], G[x, 2]}, {x, -10, 10}, PlotStyle \[Rule] {RGBColor[0, 0, 1], \
+RGBColor[1, 0, 0]}, PlotRange \[Rule] All].\
+\>", "Text",ExpressionUUID->"f5dce3b2-3b33-ec46-8d09-eb26ed3e9ee2"],
+
+Cell["\<\
+Note: In Mathematica 6.0 and later versions, one can also use names for \
+colors, and for example, replace \"RGBColor[0, 0, 1]\" by \"Blue\" and \
+replace \"RGBColor[1, 0, 0]\" by \"Red\". Other color names understood by \
+Mathematica include Green, Yellow, Orange, Purple, Black, and Gray.\
+\>", "Text",ExpressionUUID->"f2a71b2a-e68b-fe45-b80f-7a987bfbc25f"],
+
+Cell["\<\
+Plot[{G[x, 1], G[x, 2]}, {x, -10, 10}, PlotStyle -> {Blue, Red}, PlotRange -> \
+All]\
+\>", "Input",ExpressionUUID->"ad2e33e8-552c-c047-b4fb-eb21fbe4d71c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Series expansions", "Section",ExpressionUUID->"9419743a-1abe-8741-978c-a3cb3233ff00"],
+
+Cell["\<\
+A useful command is the Series command, which creates a power series \
+expansion of a given expression. The command Series[f, {x, x0, n}] gives a \
+power series expansion for f as a function of x about the point x=x0 up to \
+terms of order (x - x0)^n. For example, here is the power series up to fifth \
+order around x=0 for Sin[x]:\
+\>", "Text",ExpressionUUID->"e8b4f9c5-0975-6d48-97e7-7a8fd5f67413"],
+
+Cell["Series[Sin[x], {x, 0, 5}]", "Input",ExpressionUUID->"780eb6e5-0fb0-a547-857e-21df456de455"],
+
+Cell["\<\
+We can graphically compare this series expansion and the exact expression for \
+Sin[x] to verify that the expansion is very good for small values of x. The \
+expression for the series expansion in the argument of the following Plot \
+command was made by copying the relevant part of output line 35 and pasting \
+it into the input line 36:\
+\>", "Text",ExpressionUUID->"cde773f6-f6eb-454f-9714-a965a8181550"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Sin", "[", "x", "]"}], ",", 
+     RowBox[{"x", "-", 
+      FractionBox[
+       SuperscriptBox["x", "3"], "6"], "+", 
+      FractionBox[
+       SuperscriptBox["x", "5"], "120"]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", "4"}], "}"}], ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"RGBColor", "[", 
+       RowBox[{"0", ",", "0", ",", "1"}], "]"}], ",", 
+      RowBox[{"RGBColor", "[", 
+       RowBox[{"1", ",", "0", ",", "0"}], "]"}]}], "}"}]}]}], "]"}]], "Input",\
+ExpressionUUID->"a88dbd19-c2c7-4c4f-8fbf-1564c8af8a01"],
+
+Cell[CellGroupData[{
+
+Cell["Pad\[EAcute] approximants and interpolating polynomials", "Subsection",ExpressionUUID->"09ccfb93-d32a-794f-a444-3d5a0ae3e504"],
+
+Cell["\<\
+The command Normal removes the order term O[x]^6 from the result returned by \
+Series, yielding an ordinary polynomial that may be assigned to a \
+user-defined function and evaluated in the same manner as a built-in function:\
+\>", "Text",ExpressionUUID->"50786794-7719-1c40-97ea-e2ee31c3984a"],
+
+Cell["Taylor[x_] = Normal@Series[Sin[x], {x, 0, 5}]", "Input",ExpressionUUID->"74fc8d74-10b9-444a-945f-18243aff4d26"],
+
+Cell["\<\
+PadeApproximant[f, {x, x0, {n, m}}] gives a Pad\[EAcute] approximant.\
+\>", "Text",ExpressionUUID->"05911e70-abe3-434d-aa75-203a0cd752b4"],
+
+Cell["Pade[x_] = PadeApproximant[Sin[x], {x, 0, {3, 3}}]", "Input",ExpressionUUID->"d9807d36-cf62-6948-a53f-2c22fcd3c412"],
+
+Cell[TextData[{
+ "InterpolatingPolynomial[{{",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "1"], TraditionalForm]],ExpressionUUID->
+  "a7c64e0e-12a7-2547-9f26-bc499a7a9eb6"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["f", "1"], TraditionalForm]],ExpressionUUID->
+  "5a0f162c-efa5-0246-affe-363c4aaa5083"],
+ "}, {",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "2"], TraditionalForm]],ExpressionUUID->
+  "5984cd78-c2da-124a-bcc5-3dbf079a2003"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["f", "2"], TraditionalForm]],ExpressionUUID->
+  "ba378295-ff21-fc4f-94a9-88dbb103de90"],
+ "}, ...}, x] constructs a Lagrange polynomial interpolating the function \
+values ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["f", "i"], TraditionalForm]],ExpressionUUID->
+  "735c0b04-365c-934c-a4c7-12b2a8eaef6b"],
+ " in the nodes ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]],ExpressionUUID->
+  "2e2291ed-ad13-0d47-a1ba-156ade39fe3a"],
+ " with argument ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]],ExpressionUUID->
+  "9858744f-49e1-9340-8667-d1868ae7d902"]
+}], "Text",ExpressionUUID->"07ce7132-aaea-a54d-99ce-1bdb9fe27eb1"],
+
+Cell["\<\
+p[x_] = InterpolatingPolynomial[{{0, Sin[0]}, {Pi/2, Sin[Pi/2]}, {Pi, \
+Sin[Pi]}}, x]\
+\>", "Input",ExpressionUUID->"4efd64d3-d7de-3041-a2ff-93c8b7c1a59d"],
+
+Cell[TextData[{
+ "InterpolatingPolynomial[{{",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "1"], TraditionalForm]],ExpressionUUID->
+  "f4e84ee8-9de7-ec46-bce0-cee60b477357"],
+ ", {",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["f", "1"], TraditionalForm]],ExpressionUUID->
+  "1bbb63ea-a847-ac45-8c87-255c70e109b9"],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["dfdx", "1"], TraditionalForm]],ExpressionUUID->
+  "76185100-2c78-e341-97b1-f07b231d7547"],
+ "}}, {",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "2"], TraditionalForm]],ExpressionUUID->
+  "69047109-f785-a049-aa19-b092a106257f"],
+ ", {",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["f", "2"], TraditionalForm]],ExpressionUUID->
+  "a0497175-1b21-9041-a73e-8f0cee05a6de"],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["dfdx", "2"], TraditionalForm]],ExpressionUUID->
+  "54689e0c-fc78-c941-aa0a-2eb3ebee5aa1"],
+ "}}, ...}, x] constructs a Hermite polynomial interpolating the function \
+values ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["f", "i"], TraditionalForm]],ExpressionUUID->
+  "80245549-747a-2c49-8f6b-626857f5902d"],
+ " and osculating the derivatives  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["dfdx", "i"], "=", 
+    RowBox[{
+     RowBox[{"f", "'"}], 
+     RowBox[{"(", 
+      FormBox[
+       SubscriptBox["x", "i"],
+       TraditionalForm], ")"}]}]}], TraditionalForm]],ExpressionUUID->
+  "a9f978fc-6b43-6646-9a26-0fb59b9f31ba"],
+ " in the nodes ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]],ExpressionUUID->
+  "984aa06e-20d3-544b-a0d9-5457c78e4f0a"],
+ " with argument ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]],ExpressionUUID->
+  "01f5c767-ea44-5045-8d54-0e34bd44dea2"]
+}], "Text",ExpressionUUID->"3407caeb-a192-ab4a-931e-8335a2dc8082"],
+
+Cell["\<\
+h[x_] = InterpolatingPolynomial[{{0, {Sin[0], Sin'[0]}}, {Pi/2, {Sin[Pi/2], \
+Sin'[Pi/2]}}, {Pi, {Sin[Pi], Sin'[Pi]}}}, x]\
+\>", "Input",ExpressionUUID->"6261d675-be9a-574d-b46d-aa025fef4d97"],
+
+Cell["Visualizing the approximation:", "Text",ExpressionUUID->"847ece78-1ef6-8149-a6a1-7cd2207511d6"],
+
+Cell["\<\
+Plot[{Sin[x], Taylor[x], Pade[x], p[x], h[x]}, {x, 0, 4}, PlotStyle -> \
+{Black, Blue, Red, Green, Orange}]\
+\>", "Input",ExpressionUUID->"c64e47d6-dc11-834b-9cd0-fed1a7a656f0"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Solving Equations", "Section",ExpressionUUID->"57a45e0a-3239-9846-8dd9-608c746ea9b6"],
+
+Cell["\<\
+Another useful command is the Solve command for solving equations. \
+Solve[eqns, vars] solves an equation or set of equations for the variables \
+var. (The numerical version of Solve is NSolve, which provides numerical \
+solutions for equations in which all parameters have numerical values.) A \
+simple example of Solve is the simultaneous set of equations x=a+b*y and \
+y=c+d*x. Because some of these symbols have been used previously, we begin by \
+clearing x, y, a, b, c, d using the Clear command. (Actually, in this session \
+only y has to be cleared because only y has been set to a specific value, \
+which occurred through the command y=z /. b \[Rule]1 in input line 13. ) Note \
+that in the Solve command, the equal sign for each equation is replaced by a \
+double-equal sign. This is because Mathematica regards mathematical equations \
+to be logical statements requiring the \"==\" symbol, whereas Mathematica \
+regards the \"=\" symbol to mean that the expression on the left-hand side of \
+the \"=\" symbol is set to the current value of the expression on the \
+right-hand side of the \"=\" symbol, as in our previous use of f=Sin[x]E^(-x) \
+to define f.\
+\>", "Text",ExpressionUUID->"aade5ff0-d662-f245-9c33-f38c0ebf85c8"],
+
+Cell["Clear[x, y, a, b, c, d]", "Input",ExpressionUUID->"aca243c1-5592-a84a-b95f-8fc4a9b9f4d4"],
+
+Cell["Solve[{x == a + b y, y == c + d x}, {x, y}]", "Input",ExpressionUUID->"890a0048-909e-5949-8876-5e35fa226dce"],
+
+Cell["\<\
+Note that the solution is expressed in a strange looking list with nested \
+parentheses and arrows. If we need explicit expressions for the solutions for \
+further calculations, we can copy and paste the desired solutions for x and y \
+from the output line to a new command line. Alternatively, one can extract \
+expressions for x and y directly from the output line by using Mathematica's \
+rules about lists. To do this, we first define \"mysol\" to be the output \
+line of Solve. As shown below, we can then extract the desired solutions for \
+x and y, which we name xsol and ysol, respectively.\
+\>", "Text",ExpressionUUID->"3901a104-956e-2a47-90f3-b7cef4974383"],
+
+Cell["mysol = Solve[{x == a + b y, y == c + d x}, {x, y}]", "Input",ExpressionUUID->"2fdfd61b-d4a8-5f44-8b15-43f377f86856"],
+
+Cell["xsol = mysol[[1, 1, 2]]", "Input",ExpressionUUID->"8633dd4d-a057-d841-9eea-32ab4b2388d4"],
+
+Cell["ysol = mysol[[1, 2, 2]]", "Input",ExpressionUUID->"8e24b5bf-81b9-704d-a1e9-96dc6a41894d"],
+
+Cell["\<\
+As seen from the previous two commands, the syntax rule for extracting \
+elements of lists involves nested square brackets with the numbers within \
+these brackets specifying the location of the desired element within the \
+list. (For more information on list extraction rules, see \
+https://reference.wolfram.com/language/guide/ListManipulation.html)\
+\>", "Text",ExpressionUUID->"0c09a441-d6a4-d648-81f6-c09cf3ff4260"],
+
+Cell["\<\
+Now let's check that our solutions are correct by substituting xsol and ysol \
+in our original equations after writing them in the form x-a-b*y=0 and \
+y-c-d*x=0. We use the Simplify command to get Mathematica to simplify the \
+left hand side of each of these equations. If the results are exactly equal \
+to zero, we have verified that xsol and ysol are the solutions to our \
+equations.\
+\>", "Text",ExpressionUUID->"d5e961b2-49f8-7046-ae1d-b4d52d265a6a"],
+
+Cell["xsol - a - b ysol", "Input",ExpressionUUID->"71708f0f-2615-884b-a859-16af30a82529"],
+
+Cell["Simplify[xsol - a - b ysol]", "Input",ExpressionUUID->"2011dc02-e176-dc44-bb0c-468b963630de"],
+
+Cell["Simplify[ysol - c - d xsol]", "Input",ExpressionUUID->"c8311e51-92be-214a-8c0e-64b918671b59"],
+
+Cell["\<\
+We remark that this technique can be used to test whether any two algebraic \
+quantities are equal. For example, to determine if some expression A is equal \
+to another expression B, enter the command Simplify[A-B] and see whether \
+Mathematica returns the result 0. (For more complicated expressions A and B, \
+try the command FullSimplify[A-B], which directs Mathematica to use a more \
+advanced algorithm than used by the command Simplify[A-B].)\
+\>", "Text",ExpressionUUID->"ed56a876-a1eb-944b-bf29-b3851ae90651"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Final comments on defining and evaluating expressions in Mathematica:\
+\>", "Section",ExpressionUUID->"681e8bc8-a694-0445-a3e3-7c33ab43a2b7"],
+
+Cell["\<\
+You need to be careful in defining expressions and in using the correct \
+values of variables in these expressions. Errors may occur if the value of a \
+variable is changed during the course of session and you subsequently \
+evaluate an expression containing that variable without realizing that the \
+value of the variable has changed. Be especially mindful of this if you \
+decide to undertake the potentially dangerous action of scrolling back to an \
+earlier command and re-entering the command after values of various variables \
+have been changed since the command was originally entered.\
+\>", "Text",ExpressionUUID->"33577737-32d5-c141-9e33-4e55825c7ef2"],
+
+Cell["\<\
+When an expression is defined by a command such as f = Sin[10 x] E^(-x), the \
+quantity on the left-hand side of the \"=\" sign is immediately assigned the \
+expression that is on the right-hand side of the \"=\" sign. It is essential \
+that x has not been given a specific value before the definition is entered, \
+otherwise f is immediately set to the value f for that specific value of x, \
+and any subsequent calculation or plot of f will always return that same \
+value. For example, if x=1 was the last value entered for x before you \
+entered the definition f = Sin[10 x] E^(-x), Mathematica will set f equal to \
+Sin[10] E^(-1) and will always use this value in every subsequent \
+calculation. In the session shown above, x was not assigned any value before \
+the definition was entered in input line 6, so there was no error in defining \
+f. As a precaution against such errors, it is good practice to \"clear\" x by \
+entering the command Clear[x] before entering the definition of f in terms of \
+x. Assuming that f has already been properly defined as in the session shown \
+here, entering x=1 and then entering f will give Sin[10] E^(-1). If this is \
+in turn followed by entering x=2 and then entering f, the result will be \
+Sin[20] E^(-2). If this in turn is followed by entering Clear[x] and then \
+entering f, the result will be the original expression Sin[10 x] E^(-x).\
+\>", "Text",ExpressionUUID->"0370a3b0-b9f8-8943-9838-1eb84b6d37b3"],
+
+Cell["\<\
+Whenever you are in doubt on the current meaning or value of a symbol, enter \
+it by itself in an input line and see what Mathematica returns as its value. \
+If you enter a symbol such as f or x or b or F[x] and Mathematica returns the \
+same symbol for its output line, this means that the symbol is not currently \
+defined. If the output line is not consistent with your intended definition, \
+you may need to clear symbols and/or re-enter the definition. A useful \
+command that clears definitions for all functions, expressions and variables \
+(except Mathematica's built-in definitions) is Clear[\"Global`*\"].\
+\>", "Text",ExpressionUUID->"12eb05ce-9af8-4247-b492-08528cbfaac6"],
+
+Cell["\<\
+For more on defining expressions and functions, and for many useful commands \
+and examples see https://reference.wolfram.com/language/\
+\>", "Text",ExpressionUUID->"97c29571-139a-f542-8929-92b1c13c7f07"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{950.25, 558.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"15.0 for Microsoft Windows (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2094b40a-6257-d242-ae8c-9441afdc363d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 92, 0, 96, "Title",ExpressionUUID->"6387ac9a-657c-ca4d-97b6-6d03b6a82ee5"],
+Cell[671, 24, 281, 4, 55, "Text",ExpressionUUID->"1b8adc06-e9b8-eb4f-93de-0be1362e8a63"],
+Cell[955, 30, 264, 5, 55, "Text",ExpressionUUID->"7641b61c-beca-df49-9ed7-b102831c2d38"],
+Cell[1222, 37, 474, 7, 77, "Text",ExpressionUUID->"8a6dc32b-7613-6e48-9fca-93ca2b71268b"],
+Cell[CellGroupData[{
+Cell[1721, 48, 115, 0, 66, "Section",ExpressionUUID->"87d6e2dd-f70a-794f-b484-5a86e66d8b43"],
+Cell[1839, 50, 133, 0, 33, "Text",ExpressionUUID->"5107f8be-6256-d34d-9921-5f3a4af1d064"],
+Cell[1975, 52, 853, 12, 143, "Text",ExpressionUUID->"1a10b425-6125-9945-8097-51b62a817613"],
+Cell[2831, 66, 949, 13, 164, "Text",ExpressionUUID->"fac9adcf-4b11-0542-be5c-2253aac777c7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3817, 84, 91, 0, 70, "Section",ExpressionUUID->"139e2f08-c841-ef43-85bf-9166e8078e59"],
+Cell[3911, 86, 1053, 14, 70, "Text",ExpressionUUID->"5f805c23-3c81-124c-b4e4-ac6421ddba78"],
+Cell[4967, 102, 1057, 15, 70, "Text",ExpressionUUID->"03fdd9c2-168d-e843-ad5e-b7b0ceb7e088"],
+Cell[6027, 119, 208, 3, 70, "Text",ExpressionUUID->"3676183b-989c-2842-98a7-74331f9c3e60"],
+Cell[6238, 124, 529, 16, 70, "Input",ExpressionUUID->"14a9f165-58d2-5046-8033-43e0efca9614"],
+Cell[6770, 142, 194, 3, 70, "Text",ExpressionUUID->"4c2e153d-242e-5c42-bce4-40dc3b0b29a9"],
+Cell[6967, 147, 83, 0, 70, "Input",ExpressionUUID->"567495ac-a760-d541-9966-8bba955fedfb"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7087, 152, 79, 0, 70, "Section",ExpressionUUID->"4b40c2b4-2226-1944-912f-193b774edd98"],
+Cell[7169, 154, 423, 6, 70, "Text",ExpressionUUID->"cc91407e-7653-c44c-8b72-384134fe9a59"],
+Cell[7595, 162, 503, 7, 70, "Text",ExpressionUUID->"1914bd09-d7e9-d24c-9a65-61911fa13132"],
+Cell[8101, 171, 346, 5, 70, "Text",ExpressionUUID->"16c5c54b-bea2-3f4b-8207-248e7480bc55"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8484, 181, 82, 0, 70, "Section",ExpressionUUID->"f1a32254-1f62-4e4e-b4b6-92441c866651"],
+Cell[8569, 183, 762, 10, 70, "Text",ExpressionUUID->"c4368be8-a979-c94a-88e0-a27799f79ee1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9368, 198, 98, 0, 70, "Section",ExpressionUUID->"2479193d-7189-d04a-8623-b20dc7f96adb"],
+Cell[9469, 200, 569, 8, 70, "Text",ExpressionUUID->"c2781d0f-4acf-954c-9ad0-238dd1b91e5c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10075, 213, 107, 0, 70, "Section",ExpressionUUID->"a4a06de8-628d-1c43-b9c8-557cef664201"],
+Cell[10185, 215, 562, 8, 70, "Text",ExpressionUUID->"60e339b5-6d3c-ff47-82bb-67228aa66f1d"],
+Cell[10750, 225, 648, 12, 70, "Text",ExpressionUUID->"6783f134-a93b-2241-be50-7a78640b25de"],
+Cell[11401, 239, 476, 7, 70, "Text",ExpressionUUID->"50a5c9d7-3f04-5d4f-a685-1d4878ad2718"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11914, 251, 110, 0, 70, "Section",ExpressionUUID->"877b6653-2d98-c54f-abd4-ccc3ad6f3714"],
+Cell[12027, 253, 440, 6, 70, "Text",ExpressionUUID->"72c11b7e-d355-e249-b9fd-1b9b5d96d828"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12504, 264, 109, 0, 70, "Section",ExpressionUUID->"2be8c268-bea4-fe4a-b79a-77cc5ac302f8"],
+Cell[12616, 266, 1198, 16, 70, "Text",ExpressionUUID->"ee11fbd5-3057-1342-8b84-b2e052f90da5"],
+Cell[13817, 284, 948, 13, 70, "Text",ExpressionUUID->"93e8a120-2239-a04f-ae1b-8df832297512"],
+Cell[14768, 299, 74, 0, 70, "Input",ExpressionUUID->"43b1296c-0cb0-4342-83ce-b57090043776"],
+Cell[14845, 301, 77, 0, 70, "Input",ExpressionUUID->"aceeebe8-0563-5641-96b6-24fe3b50374f"],
+Cell[14925, 303, 81, 0, 70, "Input",ExpressionUUID->"570d6257-03ae-1849-b9d0-065a04f43450"],
+Cell[15009, 305, 92, 0, 70, "Input",ExpressionUUID->"198ad4d8-df15-a040-ab63-643a2d8698c9"],
+Cell[15104, 307, 90, 0, 70, "Input",ExpressionUUID->"6a95dc57-1099-0848-b0b5-8f90ad0ac891"],
+Cell[15197, 309, 90, 0, 70, "Input",ExpressionUUID->"12c30a3d-e7d6-1140-a1a1-33dfca26ba90"],
+Cell[15290, 311, 108, 0, 70, "Input",ExpressionUUID->"859a9949-cc6e-4241-b1e6-a80bdfa0fa99"],
+Cell[15401, 313, 672, 10, 70, "Text",ExpressionUUID->"3de3d5e2-0acf-0f47-816a-30545cd1b140"],
+Cell[16076, 325, 145, 2, 70, "Input",ExpressionUUID->"bbc72416-a4be-7d44-a63f-2aff02962746"],
+Cell[16224, 329, 185, 3, 70, "Input",ExpressionUUID->"f7c6123e-fab4-854c-809f-a69ae11f8846"],
+Cell[16412, 334, 538, 7, 70, "Text",ExpressionUUID->"1f7636c1-39f7-814c-8a41-49b45adc4dc6"],
+Cell[16953, 343, 99, 0, 70, "Input",ExpressionUUID->"abb61091-e716-8447-8f11-a2706b702b18"],
+Cell[17055, 345, 87, 0, 70, "Input",ExpressionUUID->"4f4c12b0-e084-2a4d-9377-9b76dff4e54a"],
+Cell[17145, 347, 76, 0, 70, "Input",ExpressionUUID->"7a0f8dfb-7e24-ca4a-a67b-c3fbacef3724"],
+Cell[17224, 349, 96, 0, 70, "Input",ExpressionUUID->"da42e54d-e0f2-0948-9172-16671a5fbf27"],
+Cell[CellGroupData[{
+Cell[17345, 353, 100, 0, 70, "Subsection",ExpressionUUID->"ba2b1d2a-7baf-b240-9126-c5969b19e0aa"],
+Cell[17448, 355, 174, 3, 70, "Text",ExpressionUUID->"2ea10329-9d8b-3d4f-9410-f02f0c97d75b"],
+Cell[17625, 360, 256, 5, 70, "DisplayFormula",ExpressionUUID->"4f55b61d-341d-aa46-88e4-308656f2bf63"],
+Cell[17884, 367, 130, 0, 70, "Text",ExpressionUUID->"49d020e1-7755-a142-88b8-762e465acb9a"],
+Cell[18017, 369, 195, 5, 70, "Input",ExpressionUUID->"c5e55e9c-b783-4940-9cdd-d04b03495ec4"],
+Cell[18215, 376, 465, 6, 70, "Text",ExpressionUUID->"12e6743e-f4b4-aa4d-8863-e23b472c1763"],
+Cell[18683, 384, 136, 3, 70, "Input",ExpressionUUID->"de5e5a1f-3809-ab43-8db6-025ba1ecf110"],
+Cell[18822, 389, 195, 5, 70, "Input",ExpressionUUID->"e57f28aa-2804-dd4e-8164-5ec0d925aeea"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19066, 400, 109, 0, 70, "Section",ExpressionUUID->"545b05f6-82ce-714c-9514-00300277ecdf"],
+Cell[19178, 402, 746, 10, 70, "Text",ExpressionUUID->"52ed4b64-e38a-6f4f-a076-0805d2a4dcd6"],
+Cell[19927, 414, 979, 13, 70, "Text",ExpressionUUID->"6a23b275-78cd-bf46-9d75-b16d0ed0b9a3"],
+Cell[20909, 429, 97, 0, 70, "Input",ExpressionUUID->"ddfcc100-6192-fd49-9e09-1d835d56a19f"],
+Cell[21009, 431, 93, 0, 70, "Input",ExpressionUUID->"242a9e92-b375-594c-b33e-a35a4600b098"],
+Cell[21105, 433, 113, 0, 70, "Input",ExpressionUUID->"f2f79a35-7959-e040-9061-b50607149280"],
+Cell[21221, 435, 117, 0, 70, "Input",ExpressionUUID->"03581cd4-6ef5-5447-87d4-2627c5ee1f48"],
+Cell[21341, 437, 88, 0, 70, "Input",ExpressionUUID->"b9845668-ea0d-a04c-87c5-55c0a61cbcfa"],
+Cell[21432, 439, 104, 0, 70, "Input",ExpressionUUID->"49aede56-e180-9344-855d-544b622cf203"],
+Cell[21539, 441, 347, 5, 70, "Text",ExpressionUUID->"68dfd979-988f-e249-bbe1-f6c699fea9ff"],
+Cell[21889, 448, 129, 0, 70, "Input",ExpressionUUID->"6cc47eb0-f48a-b748-aabf-bb915dc16a0a"],
+Cell[22021, 450, 304, 4, 70, "Text",ExpressionUUID->"58a15c3a-7283-744d-8c8d-9a713d380fe5"],
+Cell[22328, 456, 123, 0, 70, "Input",ExpressionUUID->"256d2c4f-3844-7542-aede-bba318549fd5"],
+Cell[22454, 458, 890, 12, 70, "Text",ExpressionUUID->"02fa896f-aba2-c54c-bb5d-41992d0fa638"],
+Cell[23347, 472, 116, 0, 70, "Input",ExpressionUUID->"e4ca7648-08f7-4a4c-ab02-877d1684fdeb"],
+Cell[23466, 474, 89, 0, 70, "Input",ExpressionUUID->"cdd78374-ec7a-cc43-bf9f-c1cb973a0ead"],
+Cell[23558, 476, 105, 0, 70, "Input",ExpressionUUID->"9cda10f6-dc7d-494c-aa83-218438d9d015"],
+Cell[23666, 478, 445, 6, 70, "Text",ExpressionUUID->"702e1e59-bbc7-0047-83b6-a95d79ecf39a"],
+Cell[24114, 486, 95, 0, 70, "Input",ExpressionUUID->"251d7362-bec2-d843-a59c-6ce494785718"],
+Cell[24212, 488, 169, 3, 70, "Input",ExpressionUUID->"f16430e2-a283-8244-839e-ab59204d27fc"],
+Cell[24384, 493, 169, 3, 70, "Input",ExpressionUUID->"89c7bde5-4b68-f744-87f7-f65a0f16a8b1"],
+Cell[24556, 498, 96, 0, 70, "Input",ExpressionUUID->"ebab0366-baf6-2c46-bd1e-be780a8419ae"],
+Cell[24655, 500, 330, 5, 70, "Text",ExpressionUUID->"f5dce3b2-3b33-ec46-8d09-eb26ed3e9ee2"],
+Cell[24988, 507, 369, 5, 70, "Text",ExpressionUUID->"f2a71b2a-e68b-fe45-b80f-7a987bfbc25f"],
+Cell[25360, 514, 164, 3, 70, "Input",ExpressionUUID->"ad2e33e8-552c-c047-b4fb-eb21fbe4d71c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25561, 522, 91, 0, 70, "Section",ExpressionUUID->"9419743a-1abe-8741-978c-a3cb3233ff00"],
+Cell[25655, 524, 411, 6, 70, "Text",ExpressionUUID->"e8b4f9c5-0975-6d48-97e7-7a8fd5f67413"],
+Cell[26069, 532, 97, 0, 70, "Input",ExpressionUUID->"780eb6e5-0fb0-a547-857e-21df456de455"],
+Cell[26169, 534, 417, 6, 70, "Text",ExpressionUUID->"cde773f6-f6eb-454f-9714-a965a8181550"],
+Cell[26589, 542, 677, 20, 70, "Input",ExpressionUUID->"a88dbd19-c2c7-4c4f-8fbf-1564c8af8a01"],
+Cell[CellGroupData[{
+Cell[27291, 566, 132, 0, 70, "Subsection",ExpressionUUID->"09ccfb93-d32a-794f-a444-3d5a0ae3e504"],
+Cell[27426, 568, 304, 4, 70, "Text",ExpressionUUID->"50786794-7719-1c40-97ea-e2ee31c3984a"],
+Cell[27733, 574, 117, 0, 70, "Input",ExpressionUUID->"74fc8d74-10b9-444a-945f-18243aff4d26"],
+Cell[27853, 576, 148, 2, 70, "Text",ExpressionUUID->"05911e70-abe3-434d-aa75-203a0cd752b4"],
+Cell[28004, 580, 122, 0, 70, "Input",ExpressionUUID->"d9807d36-cf62-6948-a53f-2c22fcd3c412"],
+Cell[28129, 582, 1154, 36, 70, "Text",ExpressionUUID->"07ce7132-aaea-a54d-99ce-1bdb9fe27eb1"],
+Cell[29286, 620, 165, 3, 70, "Input",ExpressionUUID->"4efd64d3-d7de-3041-a2ff-93c8b7c1a59d"],
+Cell[29454, 625, 1768, 58, 70, "Text",ExpressionUUID->"3407caeb-a192-ab4a-931e-8335a2dc8082"],
+Cell[31225, 685, 202, 3, 70, "Input",ExpressionUUID->"6261d675-be9a-574d-b46d-aa025fef4d97"],
+Cell[31430, 690, 101, 0, 70, "Text",ExpressionUUID->"847ece78-1ef6-8149-a6a1-7cd2207511d6"],
+Cell[31534, 692, 187, 3, 70, "Input",ExpressionUUID->"c64e47d6-dc11-834b-9cd0-fed1a7a656f0"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31770, 701, 91, 0, 70, "Section",ExpressionUUID->"57a45e0a-3239-9846-8dd9-608c746ea9b6"],
+Cell[31864, 703, 1246, 17, 70, "Text",ExpressionUUID->"aade5ff0-d662-f245-9c33-f38c0ebf85c8"],
+Cell[33113, 722, 95, 0, 70, "Input",ExpressionUUID->"aca243c1-5592-a84a-b95f-8fc4a9b9f4d4"],
+Cell[33211, 724, 115, 0, 70, "Input",ExpressionUUID->"890a0048-909e-5949-8876-5e35fa226dce"],
+Cell[33329, 726, 677, 9, 70, "Text",ExpressionUUID->"3901a104-956e-2a47-90f3-b7cef4974383"],
+Cell[34009, 737, 123, 0, 70, "Input",ExpressionUUID->"2fdfd61b-d4a8-5f44-8b15-43f377f86856"],
+Cell[34135, 739, 95, 0, 70, "Input",ExpressionUUID->"8633dd4d-a057-d841-9eea-32ab4b2388d4"],
+Cell[34233, 741, 95, 0, 70, "Input",ExpressionUUID->"8e24b5bf-81b9-704d-a1e9-96dc6a41894d"],
+Cell[34331, 743, 430, 6, 70, "Text",ExpressionUUID->"0c09a441-d6a4-d648-81f6-c09cf3ff4260"],
+Cell[34764, 751, 467, 7, 70, "Text",ExpressionUUID->"d5e961b2-49f8-7046-ae1d-b4d52d265a6a"],
+Cell[35234, 760, 89, 0, 70, "Input",ExpressionUUID->"71708f0f-2615-884b-a859-16af30a82529"],
+Cell[35326, 762, 99, 0, 70, "Input",ExpressionUUID->"2011dc02-e176-dc44-bb0c-468b963630de"],
+Cell[35428, 764, 99, 0, 70, "Input",ExpressionUUID->"c8311e51-92be-214a-8c0e-64b918671b59"],
+Cell[35530, 766, 527, 7, 70, "Text",ExpressionUUID->"ed56a876-a1eb-944b-bf29-b3851ae90651"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36094, 778, 151, 2, 70, "Section",ExpressionUUID->"681e8bc8-a694-0445-a3e3-7c33ab43a2b7"],
+Cell[36248, 782, 673, 9, 70, "Text",ExpressionUUID->"33577737-32d5-c141-9e33-4e55825c7ef2"],
+Cell[36924, 793, 1467, 19, 70, "Text",ExpressionUUID->"0370a3b0-b9f8-8943-9838-1eb84b6d37b3"],
+Cell[38394, 814, 694, 9, 70, "Text",ExpressionUUID->"12eb05ce-9af8-4247-b492-08528cbfaac6"],
+Cell[39091, 825, 214, 3, 70, "Text",ExpressionUUID->"97c29571-139a-f542-8929-92b1c13c7f07"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
